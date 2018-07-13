@@ -58,13 +58,12 @@ Then follow these steps:
 - Obtain the code from git (in sparse mode) and move it to the `src` area:
 
   ```   
-  git clone --no-checkout git@github.com:cms-opendata-analyses/PhysicsObjectsInfo.git
+  git clone git@github.com:cms-opendata-analyses/PhysicsObjectsInfo.git
+  cd PhysicsObjectsInfo/PhysicsObjectsInfoExtractor	
 
-- Note that the code lives under `src`
+ 
+- Note that the code lives under `src` inside the `PhysicsObjectsInfoExtractor` package
 
-  ```
-  cd PhysicsObjectsInfo/PhysicsObjectsInfoExtractor
-  ```
 
 - Compile everything:
 
