@@ -58,16 +58,9 @@ Then follow these steps:
 - Obtain the code from git (in sparse mode) and move it to the `src` area:
 
   ```   
-  git clone --no-checkout git://github.com/caredg/objectsinfoextraction_examples.git
-  cd objectsinfoextraction_examples
-  git config core.sparseCheckout true
-  echo 'PhysicsObjectsInfo/PhysicsObjectsInfoExtractor' > .git/info/sparse-checkout
-  git checkout   
-  mv PhysicsObjectsInfo ../.
-  cd ..
-  rm -rf objectsinfoextraction_examples
+  git clone --no-checkout git@github.com:cms-opendata-analyses/PhysicsObjectsInfo.git
 
-- Go to the TriggerInfo/TriggerInfoAnalyzer area.  Note that the code lives under `src`
+- Note that the code lives under `src`
 
   ```
   cd PhysicsObjectsInfo/PhysicsObjectsInfoExtractor
