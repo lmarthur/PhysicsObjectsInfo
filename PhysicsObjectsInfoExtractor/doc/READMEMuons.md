@@ -58,7 +58,7 @@ Then follow these steps:
 - Obtain the code from git (in sparse mode) and move it to the `src` area:
 
   ```   
-  git clone git@github.com:cms-opendata-analyses/PhysicsObjectsInfo.git
+  git clone git://github.com/cms-opendata-analyses/PhysicsObjectsInfo.git
   cd PhysicsObjectsInfo/PhysicsObjectsInfoExtractor	
 
  
