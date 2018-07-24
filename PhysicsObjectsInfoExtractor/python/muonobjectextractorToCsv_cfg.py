@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms
 
-process = cms.Process("muonexttocvs")
+process = cms.Process("muonexttocsv")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
 
