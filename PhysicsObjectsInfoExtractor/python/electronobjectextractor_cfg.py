@@ -13,7 +13,7 @@ process.source = cms.Source("poolsource",
                                     )
                             )
 
-process.demo = cms.EDAnalyzer('ElectrionObjectInfoExtractor',
+process.demo = cms.EDAnalyzer('ElectronObjectInfoExtractor',
                               InputCollection = cms.InputTag("electrons")
                               )
 
