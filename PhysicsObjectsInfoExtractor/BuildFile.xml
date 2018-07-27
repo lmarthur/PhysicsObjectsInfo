@@ -3,6 +3,6 @@
 <use name="FWCore/PluginManager"/>
 <use name="FWCore/ParameterSet"/>
 <use name="DataFormats/MuonReco"/>
-<use name="DataFormats/ElectronReco"/>
+<use name="DataFormats/EgammaReco"/>
 <flags EDM_PLUGIN="1"/>
 </buildfile>
