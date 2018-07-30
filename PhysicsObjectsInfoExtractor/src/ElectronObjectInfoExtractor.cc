@@ -10,8 +10,8 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 //classes included to extract electron information
-#include "DataFormats/ElectronReco/interface/Electron.h"
-#include "DataFormats/ElectronReco/interface/ElectronFwd.h" 
+#include "DataFormats/EgammaReco/interface/Electron.h"
+#include "DataFormats/EgammaReco/interface/ElectronFwd.h"
 
 //classes included to extract tracking for the electrons
 #include "DataFormats/TrackReco/interface/Track.h"
@@ -62,7 +62,7 @@ class ElectronObjectInfoExtractor : public edm::EDAnalyzer {
   //and declare variable that will go into the root tree
   int runno; //run number
   int evtno; //event number
-  int nmu; //number of electrons in the event
+  int nelectron; //number of electrons in the event
   std::vector<float> electron_e;
   std::vector<float> electron_pt;
   std::vector<float> electron_px;
@@ -150,7 +150,7 @@ ElectronObjectInfoExtractor::analyzeElectrons(const edm::Event& iEvent)
 {
   //clear the storage containers for this objects in this event
   //these were declared above and are global
-  nmu=0;
+  nelectron=0;
   electron_e.clear();
   electron_pt.clear();
   electron_px.clear();
@@ -158,7 +158,7 @@ ElectronObjectInfoExtractor::analyzeElectrons(const edm::Event& iEvent)
   electron_pz.clear();
   electron_eta.clear();
   electron_phi.clear();
-  electron_ch.clear()
+  electron_ch.clear();
 
   edm::Handle<reco::ElectronCollection> myelectrons;
 
@@ -169,7 +169,7 @@ ElectronObjectInfoExtractor::analyzeElectrons(const edm::Event& iEvent)
    //but also "electronsFromCosmics", which could be used to study fakes.
    //If you explore the branches in the EDM file with a ROOT TBrowser, 
    //you can indeed find a
-   //"recoElectrons_electrsons__RECO" branch and a "recoElectrons_electronsFromCosmics__RECO" one.
+   //"recoElectrons_electrons__RECO" branch and a "recoElectrons_electronsFromCosmics__RECO" one.
    //Therefore, following the documentation
    //(https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideEDMGetDataFromEvent?rev=20),
    //one could simply write "electrons" instead of 
@@ -183,22 +183,10 @@ ElectronObjectInfoExtractor::analyzeElectrons(const edm::Event& iEvent)
   //check if the collection is valid
   if(myelectrons.isValid()){
       //get the number of electrons in the event
-      nmu=(*myelectrons).size();
+      nelectron=(*myelectrons).size();
 	//loop over all the electrons in this event
 	for (reco::ElectronCollection::const_iterator recoElectron = myelectrons->begin(); recoElectron!=myelectrons->end(); ++recoElectron){
-      //find only globlal electrons for this specific example
-      //https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookElectronAnalysis?rev=88
-	  //Note that this would be already a selection cut, i.e.
-	  //requiring it to be global is a constrain on what kind of electron it is
-      if(recoMu->isGlobalElectron()) {
-	  electron_e.push_back(recoElectron->energy());
-	  electron_pt.push_back(recoElectron->pt());
-	  electron_px.push_back(recoElectron->px());
-	  electron_py.push_back(recoElectron->py());
-	  electron_pz.push_back(recoElectron->pz());
-	  electron_eta.push_back(recoElectron->eta());
-	  electron_phi.push_back(recoElectron->phi());
-	  electron_ch.push_back(recoElectron->ch());
+
 
 	  // get the track combinig the information from both the Tracker and the Spectrometer
 	  reco::TrackRef recoCombinedGlbTrack = recoElectron->combinedElectron();
@@ -222,9 +210,9 @@ ElectronObjectInfoExtractor::analyzeElectrons(const edm::Event& iEvent)
 	electron_eta.push_back(-999);
 	electron_phi.push_back(-999);
 	electron_ch.push_back(-999);
-	//mu_glbtrk_pt.push_back(-999);
-	//mu_glbtrk_eta.push_back(-999);
-	//mu_glbtrk_phi.push_back(-999);
+	//electron_glbtrk_pt.push_back(-999);
+	//electron_glbtrk_eta.push_back(-999);
+	//electron_glbtrk_phi.push_back(-999);
       }
       }
     }
@@ -246,7 +234,7 @@ ElectronObjectInfoExtractor::beginJob()
   //(that would be something nice to implement).
   mytree->Branch("runno",&runno,"runno/I");
   mytree->Branch("evtno",&evtno,"evtno/I");
-  mytree->Branch("nmu",&nmu,"nmu/I");
+  mytree->Branch("nelectron",&nelectron,"nelectron/I");
   mytree->Branch("electron_e",&electron_e);
   mytree->Branch("electron_pt",&electron_pt);
   mytree->Branch("electron_px",&electron_px);
